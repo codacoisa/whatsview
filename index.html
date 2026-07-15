@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#008069" />
+    <meta name="description" content="Visualize conversas exportadas do WhatsApp com privacidade, direto no navegador." />
+    <title>WhatsView</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand" aria-label="WhatsView">
+          <span class="brand-mark" aria-hidden="true">◉</span>
+          <div><strong>WhatsView</strong><small data-i18n="localOnly">Somente neste dispositivo</small></div>
+        </div>
+        <div class="top-actions">
+          <label class="search-wrap hidden" id="searchWrap">
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" data-i18n-placeholder="search" placeholder="Pesquisar na conversa" />
+          </label>
+          <button class="icon-button" id="settingsButton" type="button" aria-label="Configurações" title="Configurações">⚙</button>
+        </div>
+      </header>
+
+      <section class="welcome" id="welcome">
+        <div class="welcome-art" aria-hidden="true">
+          <div class="phone"><div class="bubble one"></div><div class="bubble two"></div><div class="bubble three"></div></div>
+        </div>
+        <h1 data-i18n="welcomeTitle">Veja sua conversa como no WhatsApp</h1>
+        <p data-i18n="welcomeText">Abra um ZIP exportado com mídia ou apenas o arquivo TXT. Tudo é processado localmente no seu navegador.</p>
+        <label class="primary-button" for="fileInput"><span aria-hidden="true">＋</span><span data-i18n="openChat">Abrir conversa</span></label>
+        <input id="fileInput" type="file" accept=".zip,.txt,text/plain,application/zip" hidden />
+        <div class="drop-zone" id="dropZone" tabindex="0" role="button" data-i18n="dropHere">ou arraste o ZIP/TXT para cá</div>
+        <div class="privacy"><span aria-hidden="true">⌁</span><span data-i18n="privacy">Seus arquivos nunca saem deste dispositivo.</span></div>
+      </section>
+
+      <section class="viewer hidden" id="viewer" aria-live="polite">
+        <header class="chat-header">
+          <button class="avatar" id="avatar" type="button" aria-label="Participantes">W</button>
+          <div class="chat-title"><strong id="chatName">Conversa</strong><small id="chatMeta"></small></div>
+          <button class="secondary-button" id="newChatButton" type="button" data-i18n="newChat">Abrir outra</button>
+        </header>
+        <div class="chat-wallpaper" id="messages"></div>
+        <button class="scroll-bottom hidden" id="scrollBottom" type="button" aria-label="Ir para o fim">↓</button>
+      </section>
+    </main>
+
+    <dialog id="settingsDialog">
+      <form method="dialog" class="dialog-card">
+        <div class="dialog-head"><h2 data-i18n="settings">Configurações</h2><button class="icon-button close" value="cancel" aria-label="Fechar">×</button></div>
+        <label><span data-i18n="language">Idioma</span>
+          <select id="languageSelect">
+            <option value="pt-BR">Português (Brasil)</option><option value="en-US">English (US)</option>
+            <option value="es-MX">Español (México)</option><option value="hi-IN">हिन्दी (भारत)</option>
+          </select>
+        </label>
+        <label id="meField" class="hidden"><span data-i18n="myName">Meu nome na conversa</span><select id="meSelect"></select></label>
+        <p class="dialog-note" data-i18n="privacyLong">Privacidade: o arquivo é aberto apenas na memória do navegador e não é enviado ou armazenado.</p>
+      </form>
+    </dialog>
+
+    <dialog id="mediaDialog" class="media-dialog">
+      <button class="media-close" id="mediaClose" type="button" aria-label="Fechar">×</button>
+      <div id="mediaStage"></div>
+    </dialog>
+
+    <div class="toast hidden" id="toast" role="status"></div>
+    <noscript>O WhatsView precisa de JavaScript para abrir o arquivo localmente.</noscript>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
